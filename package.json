@@ -16,5 +16,8 @@
   "bugs": {
     "url": "https://github.com/huhn511/stodt-iota-odh/issues"
   },
-  "homepage": "https://github.com/huhn511/stodt-iota-odh#readme"
+  "homepage": "https://github.com/huhn511/stodt-iota-odh#readme",
+  "dependencies": {
+    "express": "^4.17.1"
+  }
 }

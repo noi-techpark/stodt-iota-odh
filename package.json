@@ -1,0 +1,19 @@
+{
+  "name": "stodt-iota-odh",
+  "version": "0.0.1",
+  "description": "Repository for the IOTA Tangle MAM streams of traffic data as Open Data part of the project STODT",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/huhn511/stodt-iota-odh.git"
+  },
+  "author": "huhn511",
+  "license": "GPL",
+  "bugs": {
+    "url": "https://github.com/huhn511/stodt-iota-odh/issues"
+  },
+  "homepage": "https://github.com/huhn511/stodt-iota-odh#readme"
+}

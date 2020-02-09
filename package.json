@@ -4,6 +4,7 @@
   "description": "Repository for the IOTA Tangle MAM streams of traffic data as Open Data part of the project STODT",
   "main": "index.js",
   "scripts": {
+    "start": "node index.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {

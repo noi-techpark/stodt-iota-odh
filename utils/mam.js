@@ -71,6 +71,7 @@ function createMessage(channel_id, data) {
             console.log('nxt_root: ', channel.channel.state.channel.next_root)
             console.log('start+1:  ', channel.channel.state.channel.start + 1)
             console.log('key: ', channel.channel.state.channel.side_key)
+            
             let message = await appendChannel(
                 channel_id,
                 data,

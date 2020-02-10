@@ -37,7 +37,6 @@ function createChannel(data) {
         
         console.log("provider", provider)
         console.log("seed", seed)
-        
 
         let state_object = Mam.init(provider, seed, 2)
 
@@ -47,7 +46,7 @@ function createChannel(data) {
         try {
 
             // publish object
-             let channel = await publish(data, state_object)
+            let channel = await publish(data, state_object)
 
             resolve(channel)
         } catch (error) {
@@ -57,98 +56,67 @@ function createChannel(data) {
     })
 }
 
-function createMessage(channel_id, data) {
-    return new Promise(async function(resolve, reject) {
-        try {
-            let channel = db
-                .get('channels')
-                .find({ id: channel_id })
-                .value()
+async function createMessage(mamState, data) {
 
-            console.log('channel', channel)
-            console.log('root: ', channel.channel.root)
-            console.log('seed: ', channel.channel.state.seed)
-            console.log('nxt_root: ', channel.channel.state.channel.next_root)
-            console.log('start+1:  ', channel.channel.state.channel.start + 1)
-            console.log('key: ', channel.channel.state.channel.side_key)
-            let message = await appendChannel(
-                channel_id,
-                data,
-                channel.channel.root,
-                channel.channel.state.seed,
-                channel.channel.state.channel.next_root,
-                channel.channel.state.channel.start,
-                channel.channel.state.channel.side_key
-            )
-            console.log('message', message)
-
-            resolve(message)
-        } catch (error) {
-            console.log('createMessage error', error)
-            reject()
+    try{
+        const mamData = await publish(data, mamState.state)
+    
+        let channel = {
+            root: mamData.root,
+            state: mamState.state,
         }
-    })
-}
+    
+        return channel;
 
-function appendChannel(
-    channel_id,
-    data,
-    root,
-    seed,
-    next_root,
-    start,
-    side_key
-) {
-    const mamState = {
-        subscribed: [],
-        channel: {
-            side_key: side_key,
-            mode: 'public',
-            next_root: next_root,
-            security: 2,
-            start: start,
-            count: 1,
-            next_count: 1,
-            index: 0,
-        },
-        seed: seed,
+    }catch(ex) {
+        console.log(ex);
     }
 
-    console.log('mamState', mamState)
-
-    const promise = new Promise(async (resolve, reject) => {
-        try {
-            if (root) {
-                const eventBody = {}
-                eventBody.data = data
-                eventBody.timestamp = Date.now()
-                eventBody.status = 'appended'
-                console.log('mamState in', mamState)
-
-                const mamData = await publish(eventBody, mamState)
-                console.log('whatsup', mamData)
-
-                let channel = {
-                    root: root,
-                    state: mamState,
-                }
-
-                db.get('channels')
-                    .find({ id: channel_id })
-                    .assign({ channel: channel })
-                    .write()
-
-                return resolve(eventBody)
-            }
-            return reject()
-        } catch (error) {
-            console.log('appendChannel error', error)
-            return reject()
-        }
-    })
-
-    return promise
 }
+
+// function appendChannel(
+//     // channel_id,
+//     data,
+//     root,
+//     seed,
+//     next_root,
+//     start,
+//     side_key
+// ) {
+//     const mamState = {
+//         subscribed: [],
+//         channel: {
+//             side_key: side_key,
+//             mode: 'public',
+//             next_root: next_root,
+//             security: 2,
+//             start: start,
+//             count: 1,
+//             next_count: 1,
+//             index: 0,
+//         },
+//         seed: seed,
+//     }
+
+//     // console.log('mamState', mamState)
+
+//     const promise = new Promise(async (resolve, reject) => {
+//         try {
+//             if (root) {
+                
+//                 console.log('mamState in', mamState)
+
+
+//             }else
+//                 return reject()
+//         } catch (error) {
+//             console.log('appendChannel error', error)
+//             return reject()
+//         }
+//     })
+
+//     return promise
+// }
 
 function getAllChannels(body) {
     return new Promise(async function(resolve, reject) {

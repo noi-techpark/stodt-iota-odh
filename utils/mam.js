@@ -56,67 +56,18 @@ function createChannel(data) {
     })
 }
 
-async function createMessage(mamState, data) {
+async function createMessage(mam, data) {
 
-    try{
-        const mamData = await publish(data, mamState.state)
-    
-        let channel = {
-            root: mamData.root,
-            state: mamState.state,
-        }
-    
-        return channel;
+    try {
 
-    }catch(ex) {
-        console.log(ex);
+        const mamData = await publish(data, mam.state);
+
+        return mamData;
+    } catch (error) {
+        console.log('MAM append error', error);
+        return null;
     }
-
-}
-
-// function appendChannel(
-//     // channel_id,
-//     data,
-//     root,
-//     seed,
-//     next_root,
-//     start,
-//     side_key
-// ) {
-//     const mamState = {
-//         subscribed: [],
-//         channel: {
-//             side_key: side_key,
-//             mode: 'public',
-//             next_root: next_root,
-//             security: 2,
-//             start: start,
-//             count: 1,
-//             next_count: 1,
-//             index: 0,
-//         },
-//         seed: seed,
-//     }
-
-//     // console.log('mamState', mamState)
-
-//     const promise = new Promise(async (resolve, reject) => {
-//         try {
-//             if (root) {
-                
-//                 console.log('mamState in', mamState)
-
-
-//             }else
-//                 return reject()
-//         } catch (error) {
-//             console.log('appendChannel error', error)
-//             return reject()
-//         }
-//     })
-
-//     return promise
-// }
+};
 
 function getAllChannels(body) {
     return new Promise(async function(resolve, reject) {

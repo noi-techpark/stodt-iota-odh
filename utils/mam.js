@@ -127,12 +127,12 @@ function getAllChannels(body) {
 
 function getMessages(channel_id) {
     return new Promise(async function(resolve, reject) {
-        let channel = db
-            .get('channels')
+        let parking = db
+            .get('parking')
             .find({ id: channel_id })
             .value()
 
-        console.log('channel', channel)
+        console.log('parking', parking)
 
         try {
             const itemEvents = []
@@ -143,11 +143,11 @@ function getMessages(channel_id) {
             }
             Mam.setIOTA(provider)
 
-            console.log('key', channel.channel.state.channel.side_key)
+            console.log('key', parking.mam.state.channel.side_key)
             let what = await Mam.fetch(
-                channel.channel.root,
+                parking.mam.root,
                 'public',
-                channel.channel.state.channel.side_key,
+                parking.mam.state.channel.side_key,
                 convertData
             )
             console.log('whatwhat', what)

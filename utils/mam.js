@@ -16,7 +16,6 @@ const publish = async (data, mamState) => {
     return new Promise(async function(resolve, reject) {
         try {
             // Create MAM Payload - STRING OF TRYTES
-            console.log("data", data)
             const trytes = asciiToTrytes(JSON.stringify(data))
             const message = Mam.create(mamState, trytes)
             // Attach the payload.
@@ -32,16 +31,11 @@ const publish = async (data, mamState) => {
 
 function createChannel(data) {
     return new Promise(async function(resolve, reject) {
-        console.log("createChannel", data)
         let seed = generateSeed()
-        
-        console.log("provider", provider)
-        console.log("seed", seed)
 
         let state_object = Mam.init(provider, seed, 2)
 
         state_object = Mam.changeMode(state_object, 'public')
-        console.log("state_object", state_object)
 
         try {
 
@@ -83,26 +77,20 @@ function getMessages(channel_id) {
             .find({ id: channel_id })
             .value()
 
-        console.log('parking', parking)
-
         try {
             const itemEvents = []
             function convertData(data) {
-                console.log('what1', data)
                 const itemEvent = JSON.parse(trytesToAscii(data))
                 itemEvents.push(itemEvent)
             }
             Mam.setIOTA(provider)
 
-            console.log('key', parking.mam.state.channel.side_key)
-            let what = await Mam.fetch(
+            await Mam.fetch(
                 parking.mam.root,
                 'public',
                 parking.mam.state.channel.side_key,
                 convertData
             )
-            console.log('whatwhat', what)
-            console.log('what', itemEvents)
 
             resolve(itemEvents)
         } catch (e) {

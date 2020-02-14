@@ -2,7 +2,7 @@ const express = require('express')
 const app = express()
 const mamModule = require('./lib/mam-server')
 const synchronizer = require('./lib/synchronizer')
-const { port } = require('../config/options.json')
+const { port } = require('./config/options.json')
 
 
 const startServer = () => {

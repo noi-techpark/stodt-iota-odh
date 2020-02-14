@@ -1,0 +1,30 @@
+
+{
+    "stations": [
+        "A22_ML103",
+        "Galilei_Roma",
+        "Milano_Palermo",
+        "Roma_Firenze",
+        "A22_ML107",
+        "Milano_Resia",
+        "Buozzi_Fiera",
+        "Druso_Palermo",
+        "Maso_Pieve",
+        "Galilei_Virgolo",
+        "Galleria_Virgolo",
+        "galvani",
+        "druso-poste",
+        "proma",
+        "caugusta",
+        "meinstein",
+        "siemens",
+        "rpi02",
+        "Agip_Einstein",
+        "Torricelli",
+        "Arginale_Palermo",
+        "Arginale_Resia",
+        "P_Campiglio",
+        "Galilei_Palermo",
+        "Galilei_Lancia"
+    ]
+}

@@ -19,6 +19,7 @@
   "homepage": "https://github.com/huhn511/stodt-iota-odh#readme",
   "dependencies": {
     "@iota/mam": "^0.7.3",
+    "async": "^3.1.1",
     "axios": "^0.19.2",
     "express": "^4.17.1",
     "lowdb": "^1.0.0",

@@ -13,6 +13,17 @@ npm start
 
 One the service will start, it fetches the latest data of all given stations from the open hup api, saves it to a local json file and published it to the IOTA Tangle.
 
+### Optopns
+You can edit the options in the config directory (config/options.json)
+```sh
+
+{
+    "provider": "https://nodes.devnet.thetangle.org:443",
+    "port": 3000,
+    "syncInterval": 100000
+}
+```
+
 ### Fetch mam streams
 
 To get the data from a mam stream, you can use https://mam-explorer.firebaseapp.com.

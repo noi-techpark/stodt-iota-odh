@@ -9,7 +9,11 @@ const startServer = () => {
 
     server.listen(3000, function() {
         console.log(`Server started on http://localhost:3000 `)
-        synchronizer.start();
+        try {
+            synchronizer.start();
+        } catch (error) {
+            console.log("synchronizer error", error)
+        }
     })
 }
 
